@@ -1,0 +1,1081 @@
+{
+    "components": {
+        "requestBodies": {
+            "Student": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Student"
+                        }
+                    },
+                    "application/xml": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Student"
+                        }
+                    }
+                },
+                "description": "Student object that needs to be added to the system"
+            },
+            "StudentArray": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/components/schemas/Assignment"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "application/xml": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/components/schemas/Assignment"
+                            },
+                            "type": "array"
+                        }
+                    }
+                },
+                "description": "List of students object"
+            }
+        },
+        "schemas": {
+            "Assignment": {
+                "example": {
+                    "assignmentId": "A123456",
+                    "classId": "C123456",
+                    "date": "2000-01-23T04:56:07+00:00",
+                    "weight": 90
+                },
+                "properties": {
+                    "assignmentId": {
+                        "example": "A123456",
+                        "type": "string"
+                    },
+                    "classId": {
+                        "example": "C123456",
+                        "type": "string"
+                    },
+                    "date": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "weight": {
+                        "example": 90,
+                        "format": "int64",
+                        "type": "integer"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "Assignment"
+                }
+            },
+            "Class": {
+                "example": {
+                    "classId": "C123456",
+                    "description": "Introduction to software methodology",
+                    "meetingLocation": "B52",
+                    "meetingTime": "TR 1700-1830",
+                    "semester": "fall2022",
+                    "status": "active",
+                    "title": "DS 519"
+                },
+                "properties": {
+                    "classId": {
+                        "example": "C123456",
+                        "type": "string"
+                    },
+                    "description": {
+                        "example": "Introduction to software methodology",
+                        "type": "string"
+                    },
+                    "meetingLocation": {
+                        "example": "B52",
+                        "type": "string"
+                    },
+                    "meetingTime": {
+                        "example": "TR 1700-1830",
+                        "type": "string"
+                    },
+                    "semester": {
+                        "enum": [
+                            "fall2022",
+                            "spring2023",
+                            "summer2023"
+                        ],
+                        "example": "fall2022",
+                        "type": "string"
+                    },
+                    "status": {
+                        "enum": [
+                            "active",
+                            "inactive"
+                        ],
+                        "example": "active",
+                        "type": "string"
+                    },
+                    "title": {
+                        "example": "DS 519",
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "class"
+                }
+            },
+            "Grades": {
+                "example": {
+                    "classId": "C123",
+                    "grades": {
+                        "A1": 76,
+                        "A2": 88,
+                        "A3": 94,
+                        "A4": 93,
+                        "A5": 88
+                    },
+                    "name": "Andrew F. Rosas",
+                    "studentId": "S123"
+                },
+                "properties": {
+                    "classId": {
+                        "example": "C123",
+                        "type": "string"
+                    },
+                    "grades": {
+                        "additionalProperties": {
+                            "type": "string"
+                        },
+                        "example": {
+                            "A1": 76,
+                            "A2": 88,
+                            "A3": 94,
+                            "A4": 93,
+                            "A5": 88
+                        },
+                        "type": "object"
+                    },
+                    "name": {
+                        "example": "Andrew F. Rosas",
+                        "type": "string"
+                    },
+                    "studentId": {
+                        "example": "S123",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "Student": {
+                "example": {
+                    "dateEnrolled": "2000-01-23T04:56:07+00:00",
+                    "name": "Andrew F. Rosas",
+                    "status": "enrolled",
+                    "universityId": "U1234567"
+                },
+                "properties": {
+                    "dateEnrolled": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "name": {
+                        "example": "Andrew F. Rosas",
+                        "type": "string"
+                    },
+                    "status": {
+                        "description": "Current Status at the university",
+                        "enum": [
+                            "enrolled",
+                            "graduated",
+                            "unenrolled"
+                        ],
+                        "type": "string"
+                    },
+                    "universityId": {
+                        "example": "U1234567",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "name",
+                    "universityId"
+                ],
+                "type": "object",
+                "xml": {
+                    "name": "pet"
+                }
+            }
+        },
+        "securitySchemes": {
+            "api_key": {
+                "in": "header",
+                "name": "x-functions-key",
+                "type": "apiKey",
+                "x-apikeyInfoFunc": "swagger_server.controllers.authorization_controller.check_api_key"
+            }
+        }
+    },
+    "externalDocs": {
+        "description": "Find out more about Swagger",
+        "url": "http://swagger.io"
+    },
+    "info": {
+        "contact": {
+            "email": "sparkeng@bu.edu"
+        },
+        "description": "This is the grading API for the course assessment.\n\n**Description:** This document describes the grading API for the course assessment. \n\nPlease note that all requests **must** include your BU ID number in the request. \n\n",
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "termsOfService": "http://swagger.io/terms/",
+        "title": "Swagger Spark! Software Engineering Assessment - OpenAPI 3.0",
+        "version": "0.0.1"
+    },
+    "openapi": "3.0.3",
+    "paths": {
+        "/class": {
+            "post": {
+                "description": "Adds a new class to the university.  This is a privileged operation and needs an admin token.",
+                "operationId": "add_class",
+                "parameters": [
+                    {
+                        "description": "The caller's BUID",
+                        "explode": true,
+                        "in": "query",
+                        "name": "buid",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Class"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Class"
+                            }
+                        },
+                        "application/xml": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Class"
+                            }
+                        }
+                    },
+                    "description": "Create a new class in the university",
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Class"
+                                }
+                            },
+                            "application/xml": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Class"
+                                }
+                            }
+                        },
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "invalid parameters were provided"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
+                "summary": "create a new class to the university",
+                "tags": [
+                    "class"
+                ],
+                "x-openapi-router-controller": "swagger_server.controllers.class_controller"
+            },
+            "servers": [
+                {
+                    "url": "https://spark-se-assessment-api.azurewebsites.net/api"
+                }
+            ]
+        },
+        "/class/GetById/{classId}": {
+            "get": {
+                "description": "Retrieve a single Class by it's ID number. This returns the same data as `/class/listBySemester` but returns only a single Class instead of multiple.",
+                "operationId": "get_class_by_id",
+                "parameters": [
+                    {
+                        "description": "The caller's BUID",
+                        "explode": true,
+                        "in": "query",
+                        "name": "buid",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form"
+                    },
+                    {
+                        "description": "ID of class to return",
+                        "explode": false,
+                        "in": "path",
+                        "name": "classId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "simple"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Class"
+                                }
+                            },
+                            "application/xml": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Class"
+                                }
+                            }
+                        },
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid ID supplied"
+                    },
+                    "404": {
+                        "description": "Pet not found"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
+                "summary": "Find class by ID",
+                "tags": [
+                    "class"
+                ],
+                "x-openapi-router-controller": "swagger_server.controllers.class_controller"
+            },
+            "servers": [
+                {
+                    "url": "https://spark-se-assessment-api.azurewebsites.net/api"
+                }
+            ]
+        },
+        "/class/listAssignments/{classId}": {
+            "get": {
+                "description": "Lists assignments for the class",
+                "operationId": "list_assignments",
+                "parameters": [
+                    {
+                        "description": "The caller's BUID",
+                        "explode": true,
+                        "in": "query",
+                        "name": "buid",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form"
+                    },
+                    {
+                        "description": "List assignments for the class with this classID",
+                        "explode": false,
+                        "in": "path",
+                        "name": "classId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "simple"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "$ref": "#/components/schemas/Assignment"
+                                    },
+                                    "type": "array",
+                                    "x-content-type": "application/json"
+                                }
+                            }
+                        },
+                        "description": "successful operation"
+                    },
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
+                "summary": "Lists assignments for the class",
+                "tags": [
+                    "class"
+                ],
+                "x-openapi-router-controller": "swagger_server.controllers.class_controller"
+            },
+            "servers": [
+                {
+                    "url": "https://spark-se-assessment-api.azurewebsites.net/api"
+                }
+            ]
+        },
+        "/class/listBySemester/{semester}": {
+            "get": {
+                "description": "Returns a listing of classes offered by semester. Note that there are only a few valid options. Students should only query the `fall2022` set.",
+                "operationId": "list_classes",
+                "parameters": [
+                    {
+                        "description": "The caller's BUID",
+                        "explode": true,
+                        "in": "query",
+                        "name": "buid",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form"
+                    },
+                    {
+                        "description": "Filter the class list by this semester",
+                        "explode": true,
+                        "in": "path",
+                        "name": "semester",
+                        "required": true,
+                        "schema": {
+                            "default": "fall2022",
+                            "enum": [
+                                "fall2022",
+                                "spring2023",
+                                "summer2023"
+                            ],
+                            "type": "string"
+                        },
+                        "style": "simple"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "$ref": "#/components/schemas/Class"
+                                    },
+                                    "type": "array",
+                                    "x-content-type": "application/json"
+                                }
+                            }
+                        },
+                        "description": "successful operation"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
+                "summary": "Returns a list of classes offered by semester",
+                "tags": [
+                    "class"
+                ],
+                "x-openapi-router-controller": "swagger_server.controllers.class_controller"
+            },
+            "servers": [
+                {
+                    "url": "https://spark-se-assessment-api.azurewebsites.net/api"
+                }
+            ]
+        },
+        "/class/listStudents/{classId}": {
+            "get": {
+                "description": "Returns a list of students enrolled in the class",
+                "operationId": "list_students",
+                "parameters": [
+                    {
+                        "description": "The caller's BUID",
+                        "explode": true,
+                        "in": "query",
+                        "name": "buid",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form"
+                    },
+                    {
+                        "description": "Filter the student list by this classID",
+                        "explode": true,
+                        "in": "path",
+                        "name": "classId",
+                        "required": true,
+                        "schema": {
+                            "default": "cs101",
+                            "type": "string"
+                        },
+                        "style": "simple"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": [
+                                        "S123",
+                                        "S234"
+                                    ],
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "type": "array",
+                                    "x-content-type": "application/json"
+                                }
+                            }
+                        },
+                        "description": "successful operation"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
+                "summary": "Returns a list of students enrolled in the class",
+                "tags": [
+                    "class"
+                ],
+                "x-openapi-router-controller": "swagger_server.controllers.class_controller"
+            },
+            "servers": [
+                {
+                    "url": "https://spark-se-assessment-api.azurewebsites.net/api"
+                }
+            ]
+        },
+        "/student": {
+            "post": {
+                "description": "Adds a new student to the university.  This is a privileged operation and needs an admin token.",
+                "operationId": "add_student",
+                "parameters": [
+                    {
+                        "description": "The caller's BUID",
+                        "explode": true,
+                        "in": "query",
+                        "name": "buid",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Student"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Student"
+                            }
+                        },
+                        "application/xml": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Student"
+                            }
+                        }
+                    },
+                    "description": "Create a new student in the university",
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Student"
+                                }
+                            },
+                            "application/xml": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Student"
+                                }
+                            }
+                        },
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "invalid parameters were provided"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
+                "summary": "Enroll a new student to the university",
+                "tags": [
+                    "student"
+                ],
+                "x-openapi-router-controller": "swagger_server.controllers.student_controller"
+            },
+            "servers": [
+                {
+                    "url": "https://spark-se-assessment-api.azurewebsites.net/api"
+                }
+            ]
+        },
+        "/student/GetById/{studentId}": {
+            "get": {
+                "description": "Returns a single student by ID",
+                "operationId": "get_student_by_id",
+                "parameters": [
+                    {
+                        "description": "The caller's BUID",
+                        "explode": true,
+                        "in": "query",
+                        "name": "buid",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form"
+                    },
+                    {
+                        "description": "ID of student to return",
+                        "explode": false,
+                        "in": "path",
+                        "name": "studentId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "simple"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Student"
+                                }
+                            },
+                            "application/xml": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Student"
+                                }
+                            }
+                        },
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid ID supplied"
+                    },
+                    "404": {
+                        "description": "Pet not found"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
+                "summary": "Find student by ID",
+                "tags": [
+                    "student"
+                ],
+                "x-openapi-router-controller": "swagger_server.controllers.student_controller"
+            },
+            "servers": [
+                {
+                    "url": "https://spark-se-assessment-api.azurewebsites.net/api"
+                }
+            ]
+        },
+        "/student/findByStatus/{status}": {
+            "get": {
+                "description": "Multiple status values can be provided with comma separated strings",
+                "operationId": "find_students_by_status",
+                "parameters": [
+                    {
+                        "description": "The caller's BUID",
+                        "explode": true,
+                        "in": "query",
+                        "name": "buid",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form"
+                    },
+                    {
+                        "description": "Status values that need to be considered for filter",
+                        "explode": true,
+                        "in": "path",
+                        "name": "status",
+                        "required": true,
+                        "schema": {
+                            "default": "enrolled",
+                            "enum": [
+                                "enrolled",
+                                "graduated",
+                                "unenrolled"
+                            ],
+                            "type": "string"
+                        },
+                        "style": "simple"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "$ref": "#/components/schemas/Student"
+                                    },
+                                    "type": "array",
+                                    "x-content-type": "application/json"
+                                }
+                            },
+                            "application/xml": {
+                                "schema": {
+                                    "items": {
+                                        "$ref": "#/components/schemas/Student"
+                                    },
+                                    "type": "array"
+                                }
+                            }
+                        },
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
+                "summary": "Finds Students by status",
+                "tags": [
+                    "student"
+                ],
+                "x-openapi-router-controller": "swagger_server.controllers.student_controller"
+            },
+            "servers": [
+                {
+                    "url": "https://spark-se-assessment-api.azurewebsites.net/api"
+                }
+            ]
+        },
+        "/student/listGrades/{studentId}/{classId}/": {
+            "get": {
+                "description": "List student grades in a particular class.",
+                "operationId": "list_grades",
+                "parameters": [
+                    {
+                        "description": "The caller's BUID",
+                        "explode": true,
+                        "in": "query",
+                        "name": "buid",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form"
+                    },
+                    {
+                        "description": "ID of the student whose grades to return",
+                        "explode": false,
+                        "in": "path",
+                        "name": "studentId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "simple"
+                    },
+                    {
+                        "explode": false,
+                        "in": "path",
+                        "name": "classId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "simple"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Grades"
+                                }
+                            },
+                            "application/xml": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Grades"
+                                }
+                            }
+                        },
+                        "description": "Successful operation"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
+                "summary": "Lists student grades in a class",
+                "tags": [
+                    "student"
+                ],
+                "x-openapi-router-controller": "swagger_server.controllers.student_controller"
+            },
+            "servers": [
+                {
+                    "url": "https://spark-se-assessment-api.azurewebsites.net/api"
+                }
+            ]
+        },
+        "/student/{studentId}": {
+            "delete": {
+                "description": "delete a student",
+                "operationId": "delete_student",
+                "parameters": [
+                    {
+                        "description": "",
+                        "explode": false,
+                        "in": "header",
+                        "name": "api_key",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "simple"
+                    },
+                    {
+                        "description": "Student id to delete",
+                        "explode": false,
+                        "in": "path",
+                        "name": "studentId",
+                        "required": true,
+                        "schema": {
+                            "format": "int64",
+                            "type": "integer"
+                        },
+                        "style": "simple"
+                    }
+                ],
+                "responses": {
+                    "400": {
+                        "description": "Invalid studentID value"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
+                "summary": "Deletes a student",
+                "tags": [
+                    "student"
+                ],
+                "x-openapi-router-controller": "swagger_server.controllers.student_controller"
+            },
+            "post": {
+                "description": "This is a privileged operation and needs an admin token.",
+                "operationId": "update_student_with_form",
+                "parameters": [
+                    {
+                        "description": "ID of student that needs to be updated",
+                        "explode": false,
+                        "in": "path",
+                        "name": "studentId",
+                        "required": true,
+                        "schema": {
+                            "format": "int64",
+                            "type": "integer"
+                        },
+                        "style": "simple"
+                    },
+                    {
+                        "description": "Name of student that needs to be updated",
+                        "explode": true,
+                        "in": "query",
+                        "name": "name",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form"
+                    },
+                    {
+                        "description": "Status of student that needs to be updated",
+                        "explode": true,
+                        "in": "query",
+                        "name": "status",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form"
+                    }
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
+                "summary": "Updates a student in the university with form data.",
+                "tags": [
+                    "student"
+                ],
+                "x-openapi-router-controller": "swagger_server.controllers.student_controller"
+            },
+            "put": {
+                "description": "Update an existing student by Id. This is a privileged operation and needs an admin token.",
+                "operationId": "update_student",
+                "parameters": [
+                    {
+                        "description": "The caller's BUID",
+                        "explode": true,
+                        "in": "query",
+                        "name": "buid",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form"
+                    },
+                    {
+                        "description": "ID of student to update",
+                        "explode": false,
+                        "in": "path",
+                        "name": "studentId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "simple"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Student"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Student"
+                            }
+                        },
+                        "application/xml": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Student"
+                            }
+                        }
+                    },
+                    "description": "Update an existent student enrolled in the university.",
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Student"
+                                }
+                            },
+                            "application/xml": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Student"
+                                }
+                            }
+                        },
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid ID supplied"
+                    },
+                    "404": {
+                        "description": "Student not found"
+                    },
+                    "405": {
+                        "description": "Validation exception"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
+                "summary": "Update an existing student",
+                "tags": [
+                    "student"
+                ],
+                "x-openapi-router-controller": "swagger_server.controllers.student_controller"
+            },
+            "servers": [
+                {
+                    "url": "https://spark-se-assessment-api.azurewebsites.net/api"
+                }
+            ]
+        }
+    },
+    "servers": [
+        {
+            "url": "/api"
+        }
+    ],
+    "tags": [
+        {
+            "description": "This API can be used to perform operations on student grades",
+            "name": "Grading API"
+        },
+        {
+            "description": "Access to Students",
+            "name": "student"
+        },
+        {
+            "description": "Access to Classes",
+            "name": "class"
+        }
+    ]
+}
