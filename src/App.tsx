@@ -44,7 +44,7 @@ function App() {
             Final Grades
           </Typography>
           <div>Place the grade table here</div>
-          </GradeTable>
+          <GradeTable/>
         </Grid>
       </Grid>
     </div>
