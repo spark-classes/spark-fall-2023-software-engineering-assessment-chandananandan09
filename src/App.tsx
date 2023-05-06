@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Grid from "@mui/material/Unstable_Grid2";
 import { Select, Typography } from "@mui/material";
+import { GradeTable } from "./components/GradeTable";
 /**
  * You will find globals from this file useful!
  */
@@ -12,22 +13,8 @@ function App() {
   const [currClassId, setCurrClassId] = useState<string>("");
   const [classList, setClassList] = useState<IUniversityClass[]>([]);
 
-  /**
-   * This is JUST an example of how you might fetch some data(with a different API).
-   * As you might notice, this does not show up in your console right now.
-   * This is because the function isn't called by anything!
-   *
-   * You will need to lookup how to fetch data from an API using React.js
-   * Something you might want to look at is the useEffect hook.
-   *
-   * The useEffect hook will be useful for populating the data in the dropdown box.
-   * You will want to make sure that the effect is only called once at component mount.
-   *
-   * You will also need to explore the use of async/await.
-   *
-   */
   const fetchSomeData = async () => {
-    const res = await fetch("https://cat-fact.herokuapp.com/facts/", {
+    const res = await fetch("https://spark-se-assessment-api.azurewebsites.net/api/student/findByStatus/enrolled?buid=U14131622", {
       method: "GET",
     });
     const json = await res.json();
@@ -57,6 +44,7 @@ function App() {
             Final Grades
           </Typography>
           <div>Place the grade table here</div>
+          <GradeTable/>
         </Grid>
       </Grid>
     </div>
